@@ -20,5 +20,5 @@ steps:
     commands:
       - ls
       - pwd
-      - mono ./GitVersion.exe . /showvariable SemVer
-      - mono ./GitVersion.exe . /output buildserver
+      - mono /usr/lib/GitVersion/GitVersion.exe . /showvariable SemVer
+      - mono /usr/lib/GitVersion/GitVersion.exe . /output buildserver
