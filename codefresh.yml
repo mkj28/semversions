@@ -1,0 +1,8 @@
+version: '1.0'
+steps:
+  build:
+    title: Build Docker Image
+    type: build
+    image_name: mkj28/semversions
+    working_directory: ./
+    dockerfile: Dockerfile
