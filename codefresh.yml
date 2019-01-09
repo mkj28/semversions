@@ -19,3 +19,7 @@ steps:
       - git fetch --tags --force
       - autotag -v
       - git push --tags
+    when:
+      branch:
+        only:
+          - master
