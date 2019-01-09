@@ -15,7 +15,7 @@ steps:
       - echo ${SSH_KEY} | base64 -d > ~/.ssh/id_rsa && chmod 600 ~/.ssh/id_rsa
       - pwd
       - git status
-      - git log -1
+      - git rev-parse HEAD
       - git fetch --tags --force
       - autotag -v
       - git push --tags
