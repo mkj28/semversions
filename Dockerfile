@@ -21,6 +21,7 @@ RUN GOOS=linux GOARCH=amd64 go build -i -o autotag/autotag autotag/*.go
 FROM alpine:3.8 AS production
 
 RUN apk add --update --no-cache git bash openssh
-RUN mkdir -p ~/.ssh
+# config for git
+RUN mkdir -p ~/.ssh && echo -e "[url \"ssh://git@github.com:\"]\\n\\tinsteadOf = https://github.com" >> ~/.gitconfig
 
 COPY --from=builder /go/src/github.com/pantheon-systems/autotag/autotag /usr/local/bin/
