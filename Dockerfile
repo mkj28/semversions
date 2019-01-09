@@ -22,6 +22,8 @@ FROM alpine:3.8 AS production
 
 RUN apk add --update --no-cache git bash openssh
 # config for git
-RUN mkdir -p ~/.ssh && echo -e "[url \"ssh://git@github.com:\"]\\n\\tinsteadOf = https://github.com" >> ~/.gitconfig
+RUN mkdir -p ~/.ssh && \
+    echo -e "[url \"ssh://git@github.com:\"]\\n\\tinsteadOf = https://github.com" >> ~/.gitconfig && \
+    echo -e "Host github.com\n\tStrictHostKeyChecking no\n" > ~/.ssh/config
 
 COPY --from=builder /go/src/github.com/pantheon-systems/autotag/autotag /usr/local/bin/
