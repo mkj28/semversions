@@ -1,7 +1,25 @@
-FROM java:openjdk-8-jdk-alpine
+FROM golang:1.11-alpine AS builder
 
-ADD HelloWorld.java HelloWorld.java
+ENV GOBIN $GOPATH/bin
+ENV GOROOT /usr/local/go
+ENV PATH $PATH:/:$GOROOT/bin:$GOPATH/bin
 
-RUN javac HelloWorld.java
+RUN apk add --update --no-cache git bash curl openssh make
 
-ENTRYPOINT ["java", "-Djava.security.egd=file:/dev/./urandom", "HelloWorld"]
+ARG go_workspace=/go
+ENV GOPATH $go_workspace
+ENV PROJECT_DIR=$GOPATH/src/github.com/pantheon-systems
+WORKDIR $PROJECT_DIR
+
+RUN git clone https://github.com/pantheon-systems/autotag.git
+
+WORKDIR $PROJECT_DIR/autotag
+RUN make deps
+
+RUN GOOS=linux GOARCH=amd64 go build -i -o autotag/autotag autotag/*.go
+
+FROM alpine:3.8 AS production
+
+RUN apk add --update --no-cache git bash openssh
+
+COPY --from=builder /go/src/github.com/pantheon-systems/autotag/autotag /usr/local/bin/

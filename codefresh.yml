@@ -1,12 +1,5 @@
 version: '1.0'
 steps:
-  init-variables:
-    title: Init variables
-    image: alpine
-    commands:
-      - cf_export GITTOOLS_GITVERSION_TAG=v4.0.0-beta.12
-      - cf_export GIT_BRANCH=${{CF_BRANCH}}
-
   build:
     title: Build Docker Image
     type: build
@@ -15,10 +8,8 @@ steps:
     dockerfile: Dockerfile
 
   semver:
-    image: gittools/gitversion:${{GITTOOLS_GITVERSION_TAG}}
+    image: ${{build}}
     title: Setting Semversions
+    working_directory: ${{main_clone}}
     commands:
-      - ls
-      - pwd
-      - mono /usr/lib/GitVersion/GitVersion.exe . /showvariable SemVer
-      - mono /usr/lib/GitVersion/GitVersion.exe . /output buildserver
+      - autotag -v
