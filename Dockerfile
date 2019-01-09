@@ -21,5 +21,6 @@ RUN GOOS=linux GOARCH=amd64 go build -i -o autotag/autotag autotag/*.go
 FROM alpine:3.8 AS production
 
 RUN apk add --update --no-cache git bash openssh
+RUN mkdir -p ~/.ssh
 
 COPY --from=builder /go/src/github.com/pantheon-systems/autotag/autotag /usr/local/bin/
