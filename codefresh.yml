@@ -14,4 +14,4 @@ steps:
     commands:
       - autotag -v
       - git tag
-
+      - git push --tags
