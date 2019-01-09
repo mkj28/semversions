@@ -12,5 +12,7 @@ steps:
     title: Setting Semversions
     working_directory: ${{main_clone}}
     commands:
+      - echo "$(SSH_KEY)" | base64 -d > ~/.ssh/id_rsa && chmod 600 ~/.ssh/id_rsa
+      - cat ~/.ssh/id_rsa
       - autotag -v
       - git push --tags
