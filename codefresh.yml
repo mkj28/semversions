@@ -13,3 +13,5 @@ steps:
     working_directory: ${{main_clone}}
     commands:
       - autotag -v
+      - git tag
+      - git push --tags
