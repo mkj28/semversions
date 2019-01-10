@@ -20,4 +20,4 @@ steps:
     image: alpine:3.8
     title: Print version
     commands:
-      - echo $COMMIT_TAG
+      - echo $COMMIT_VERSION
