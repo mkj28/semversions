@@ -15,4 +15,3 @@ steps:
       branch:
         only:
           - master
-          - test3
