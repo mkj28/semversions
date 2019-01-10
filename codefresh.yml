@@ -17,7 +17,7 @@ steps:
       - git status
       - git rev-parse HEAD
       - date
-      - git tag v$(date "+%Y").$(date "+%m%d").$(printf %04d $(git rev-list HEAD --count --date=local --after "yesterday"))
+      - TZ=UTC git tag v$(date "+%Y").$(date "+%m%d").$(printf %04d $(git rev-list HEAD --count --date=local --after "yesterday"))
       - git push --tags
     when:
       branch:
