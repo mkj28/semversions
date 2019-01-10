@@ -17,4 +17,4 @@ git tag $COMMIT_TAG
 git push --tags
 
 # make available for other Codefresh steps
-cf_export COMMIT_TAG=$COMMIT_TAG
+echo COMMIT_TAG=${COMMIT_TAG} >> ${CF_VOLUME_PATH}/env_vars_to_export
