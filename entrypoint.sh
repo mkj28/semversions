@@ -20,7 +20,7 @@ COMMIT_VERSION=${PREFIX}${DATE_STRING}.${COMMITS_THIS_DAY}
 
 # check if tag already exists
 if [[ "$(git tag -l --points-at HEAD | grep ${COMMIT_VERSION} | wc -l)" -gt 0 ]]; then
-    echo "WARN: ${COMMIT_VERSION} already pointing to this commit"
+    echo "INFO: ${COMMIT_VERSION} already pointing to this commit"
     echo COMMIT_VERSION=${COMMIT_VERSION} >> ${CF_VOLUME_PATH}/env_vars_to_export
     exit 0
 fi
