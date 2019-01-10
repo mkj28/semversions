@@ -1,14 +1,14 @@
 #!/usr/bin/env bash
 set -eu
 
-echo $(git rev-parse --abbrev-ref HEAD)
+echo "${CF_BRANCH_TAG_NORMALIZED}"
 
 if [[ -z "${CF_BUILD_ID}" ]]; then
     echo "ERROR: only runs on Codefresh"
     exit 1
 fi
 
-if [[ "$(git rev-parse --abbrev-ref HEAD)" != "master" ]]; then
+if [[ "${CF_BRANCH_TAG_NORMALIZED}" != "master" ]]; then
     echo "ERROR: only working on master branch"
     exit 1
 fi
