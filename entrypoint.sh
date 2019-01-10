@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 set -eu
 
+echo $(git rev-parse --abbrev-ref HEAD)
+
 if [[ -z "${CF_BUILD_ID}" ]]; then
     echo "ERROR: only runs on Codefresh"
     exit 1
