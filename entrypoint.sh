@@ -14,9 +14,9 @@ echo ${SSH_KEY_BASE64} | base64 -d > ~/.ssh/id_rsa && chmod 600 ~/.ssh/id_rsa
 export TZ=UTC
 COMMIT_TIMESTAMP=$(git log -1 --format="%at")
 DATE_STRING=$(date -d @${COMMIT_TIMESTAMP} "+%Y.%m%d")
-COMMITS_LEADING_TO_CURRENT=$(printf %04d $(git rev-list HEAD --count --date=local --after="$(date -d @${COMMIT_TIMESTAMP} "+%Y-%m-%d 00:00")"))
+COMMITS_THIS_DAY=$(printf %04d $(git rev-list HEAD --count --date=local --after="$(date -d @${COMMIT_TIMESTAMP} "+%Y-%m-%d 00:00")"))
 
-COMMIT_VERSION=${PREFIX}${DATE_STRING}.${COMMITS_LEADING_TO_CURRENT}
+COMMIT_VERSION=${PREFIX}${DATE_STRING}.${COMMITS_THIS_DAY}
 
 # check if tag already exists
 if [[ "$(git tag -l --points-at HEAD | grep ${COMMIT_VERSION} | wc -l)" -gt 0 ]]; then
