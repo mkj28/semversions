@@ -14,4 +14,4 @@ steps:
     when:
       branch:
         only:
-          - master
+          - test2
