@@ -7,15 +7,6 @@ steps:
     working_directory: ./
     dockerfile: Dockerfile
 
-  git_commit:
-    image: sagan/generate-commit-tags:v0.0.2
-    title: Tag git
-    working_directory: ${{main_clone}}
-    when:
-      branch:
-        only:
-          - master
-
   semver:
     image: ${{build}}
     title: Setting Semversions

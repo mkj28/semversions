@@ -6,6 +6,6 @@ RUN mkdir -p ~/.ssh && \
     echo -e "[url \"ssh://git@github.com:\"]\\n\\tinsteadOf = https://github.com" >> ~/.gitconfig && \
     echo -e "Host github.com\n\tStrictHostKeyChecking no\n" > ~/.ssh/config
 
-COPY entrypoint.sh .
+COPY semversions.sh /usr/local/bin/
 
-ENTRYPOINT [ "./entrypoint.sh" ]
+ENTRYPOINT [ "semversions.sh" ]
