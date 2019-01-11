@@ -1,2 +1,2 @@
 # semversions
-For testing semantic versions in git commits
+For testing semantic-like versions in git commits
