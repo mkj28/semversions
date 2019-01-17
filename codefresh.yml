@@ -11,10 +11,8 @@ steps:
     image: ${{build}}
     title: Setting Semversions
     working_directory: ${{main_clone}}
-    when:
-      branch:
-        only:
-          - master
+    environment:
+      - SSH_KEY_BASE64=${{SSH_KEY_BASE64}} # base-64 encoded ssh key with permission to push tags
 
   debug:
     image: alpine:3.8
