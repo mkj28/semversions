@@ -4,8 +4,8 @@ set -eu
 PREFIX=v
 SUFFIX="" # for dev branches
 
-if [ -z "${CF_BRANCH_TAG_NORMALIZED}" ]; then
-    echo "To be running on Codefresh only"
+if [[ -z "${CF_BRANCH_TAG_NORMALIZED}" ]]; then
+    echo "CF_BRANCH_TAG_NORMALIZED not set"
     exit 1
 fi
 
