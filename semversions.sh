@@ -2,21 +2,21 @@
 set -eu
 
 PREFIX=v
+SUFFIX="" # for dev branches
 
 if [[ "${CF_BRANCH_TAG_NORMALIZED}" != "master" ]]; then
-    echo "ERROR: only working on master branch in Codefresh"
-    exit 1
+    SUFFIX="-${CF_BRANCH_TAG_NORMALIZED}"
 fi
 
 # ssh key for git push
 echo ${SSH_KEY_BASE64} | base64 -d > ~/.ssh/id_rsa && chmod 600 ~/.ssh/id_rsa
 
 export TZ=UTC
-COMMIT_TIMESTAMP=$(git log -1 --format="%at")
+COMMIT_TIMESTAMP=$(git log -1 --format="%ct")
 DATE_STRING=$(date -d @${COMMIT_TIMESTAMP} "+%Y.%m%d")
 COMMITS_THIS_DAY=$(printf %04d $(git rev-list HEAD --count --date=local --after="$(date -d @${COMMIT_TIMESTAMP} "+%Y-%m-%d 00:00")"))
 
-COMMIT_VERSION=${PREFIX}${DATE_STRING}.${COMMITS_THIS_DAY}
+COMMIT_VERSION=${PREFIX}${DATE_STRING}.${COMMITS_THIS_DAY}${SUFFIX}
 
 # check if tag already exists
 if [[ "$(git tag -l --points-at HEAD | grep ${COMMIT_VERSION} | wc -l)" -gt 0 ]]; then
